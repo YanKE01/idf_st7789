@@ -1,0 +1,6 @@
+.vscode/
+test_apps/build/
+sdkconfig
+sdkconfig.old
+.DS_Store
+build/
