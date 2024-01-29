@@ -7,21 +7,28 @@
 #include "st7789.h"
 #include "unity.h"
 
-st7789_config_t st7789_conf = {
+st7789_dev_t dev;
+st7789_config_t config = {
+    .bl = 9,
+    .rst = 8,
+    .dc = 4,
+    .cs = 5,
+    .clk = 6,
+    .mosi = 7,
     .host = SPI2_HOST,
-    .mosi = GPIO_NUM_7,
-    .clk = GPIO_NUM_6,
-    .cs = GPIO_NUM_5,
-    .dc = GPIO_NUM_4,
-    .rst = GPIO_NUM_8,
-    .bl = GPIO_NUM_9,
 };
 
-st7789_dev_t dev;
-
-TEST_CASE("test st7789", "test")
+TEST_CASE("st7789 full screen test", "[st7789][full screen]")
 {
-    st7789_init(&dev, &st7789_conf);
+    st7789_init(&dev, &config, 240, 240);
+
+    uint16_t test_color[] = {RED, GREEN, WHITE, GRAY, BLUE, BLACK};
+    for (int i = 0; i < sizeof(test_color) / sizeof(test_color[0]); i++)
+    {
+        st7789_draw_fill_rect(&dev, 0, 0, 240 - 1, 240 - 1, test_color[i]);
+        vTaskDelay(200 / portTICK_PERIOD_MS);
+    }
+    ESP_ERROR_CHECK(st7789_del(&dev));
 }
 
 void app_main(void)
