@@ -72,3 +72,12 @@ void st7789_draw_fill_rect(st7789_dev_t *dev, uint16_t x1, uint16_t y1, uint16_t
  * @param color 
  */
 void st7789_draw_pixel(st7789_dev_t *dev, uint16_t x, uint16_t y, uint16_t color);
+
+
+/**
+ * @brief sreen clean
+ * 
+ * @param dev 
+ * @param color 
+ */
+void st7789_fullclean(st7789_dev_t *dev, uint16_t color);

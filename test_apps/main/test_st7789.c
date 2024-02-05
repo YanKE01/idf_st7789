@@ -18,9 +18,20 @@ st7789_config_t config = {
     .host = SPI2_HOST,
 };
 
+st7789_config_t config2 = {
+    .bl = 45,
+    .rst = 47,
+    .dc = 13,
+    .cs = 14,
+    .clk = 21,
+    .mosi = 48,
+    .host = SPI2_HOST,
+};
+
+
 TEST_CASE("st7789 full screen test", "[st7789][full screen]")
 {
-    st7789_init(&dev, &config, 240, 240);
+    st7789_init(&dev, &config2, 240, 240);
 
     uint16_t test_color[] = {RED, GREEN, WHITE, GRAY, BLUE, BLACK};
     for (int i = 0; i < sizeof(test_color) / sizeof(test_color[0]); i++)

@@ -1,0 +1,3 @@
+dedependencies:
+  idf: ">=5.0"
+

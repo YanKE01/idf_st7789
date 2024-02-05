@@ -15,6 +15,10 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
-      - name: build project
+      - name: build test_apps
         run: docker run --rm -v ${{ github.workspace }}:/$PROJECT_NAME espressif/idf sh -c "
           cd $PROJECT_NAME/test_apps && idf.py set-target esp32s3 && idf.py build"
+
+      - name: build jpeg examples
+        run: docker run --rm -v ${{ github.workspace }}:/$PROJECT_NAME espressif/idf sh -c "
+          cd $PROJECT_NAME/examples/jpeg && idf.py set-target esp32s3 && idf.py build"
